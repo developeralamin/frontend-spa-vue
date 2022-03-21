@@ -15,8 +15,7 @@
     <div class="card-title">
         <h1> {{ showSingleCourse.title }}</h1> 
         <br>
-        <h3>Category Name:  {{ showSingleCourse.category_id }}</h3>
-        <!-- <option  v-for="category in categories" :key="category.id" :value="category.id">{{ category.title }}</option> -->
+        <h3>Category: <span class="category">{{ showSingleCourse.category_id }}</span> </h3>
         <br>
         {{ showSingleCourse.description }}
         
@@ -55,30 +54,21 @@ export default {
         };
     },
 
-  
-
     methods: {
           async loadCourse(){
            await axios.get('http://127.0.0.1:8000/api/courses/'+this.$route.params.id)
             .then(response =>{
                  this.showSingleCourse.title = response.data.data.title
                 this.showSingleCourse.description = response.data.data.description
-                this.showSingleCourse.category_id = response.data.data.category_id
+                this.showSingleCourse.category_id = response.data.data.category.title
                 this.showSingleCourse.photo =response.data.path+ response.data.data.photo
             })
-        },
-         getCategory(){
-              axios.get('http://127.0.0.1:8000/api/category')
-                .then(response => {
-                    this.categories = response.data.data
-             })
         },
         
     },
 
    mounted() {
         this.loadCourse();
-        this.getCategory();
     },
 
 };
@@ -89,5 +79,8 @@ export default {
 span{
    color: aqua;
 }
-
+.category{
+   background: green;
+   padding: 12px;
+}
 </style>

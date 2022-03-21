@@ -92,6 +92,9 @@
                 // console.log(response.data)
                 else{
                     alert('invalid credential')
+                    //  this.login.email = null
+                    //  this.login.password = null
+                  
                 }
                 
             })

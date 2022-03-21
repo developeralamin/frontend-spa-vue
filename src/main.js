@@ -14,6 +14,5 @@ import LaravelVuePagination from 'laravel-vue-pagination';
 
 
 createApp(App).use(router,axios,LaravelVuePagination).mount('#app')
-// App.component('app-header', ('components/Header.vue'));
 
 
