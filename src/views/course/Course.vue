@@ -21,27 +21,26 @@
                                     <th style="width: 170px"> Action </th>
                                 </tr>
                             </thead>
-                            <tbody v-if="courses.length">
-                                <tr v-for="(course,index) in courses" :key="index" >
+                    <tbody v-if="courses.length">
+                        <tr v-for="(course,index) in courses" :key="index" >
 
-                                    <td style="width: 100px"> {{ index+1 }} </td>
-                                    <td> {{ course.title }} </td>
-                                    <!-- <td> {{ course.description }} </td> -->
-                                    <td> 
-                                        <img 
-                                            :src="course.photo" 
-                                            alt=""
-                                            style="height:100px"
-                                        > 
-                                    </td>
-                                    <td> {{ course.category.title }} </td>
-              
-                            <td style="width: 170px">
-        <router-link :to="{name: 'edit-course', params: {id: course.id}}"  class="btn btn-success ">Edit</router-link>                    
-       <button @click="deleteCourse(course.id)"  class="btn btn-danger ">Delete</button>
+                            <td style="width: 100px"> {{ index+1 }} </td>
+                            <td> {{ course.title }} </td>
+                            <td> 
+                                <img 
+                                    :src="course.photo" 
+                                    alt=""
+                                    style="height:100px"
+                                > 
                             </td>
-                                </tr>
-                            </tbody>
+                            <td> {{ course.category.title }} </td>
+        
+                    <td style="width: 170px">
+<router-link :to="{name: 'edit-course', params: {id: course.id}}"  class="btn btn-success ">Edit</router-link>                    
+<button @click="deleteCourse(course.id)"  class="btn btn-danger ">Delete</button>
+                    </td>
+                        </tr>
+                    </tbody>
                             <tbody v-else>
                                 <tr>
                                     <td colspan="4">

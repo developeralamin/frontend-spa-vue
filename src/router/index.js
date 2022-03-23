@@ -10,6 +10,7 @@ import EditCategory from '@/views/category/EditCategory.vue';
 import Lesson from '@/views/lesson/Lesson.vue'
 import CreateLesson from '@/views/lesson/CreateLesson.vue'
 import Editlesson from '@/views/lesson/Editlesson.vue'
+import Showlesson from '@/views/lesson/Showlesson.vue'
 
 // course component
 import Course from '@/views/course/Course.vue'
@@ -76,6 +77,12 @@ const routes = [
         name: 'edit-lesson',
         component: Editlesson,
     },
+
+     {
+        path: '/lesson/:id',
+        name: 'show-lesson',
+        component: Showlesson,
+    },
       
     // course section
     // course section   
@@ -128,7 +135,7 @@ const routes = [
             path: '/login',
             component: Login,
             name: 'login',
-     },
+      },
 
     {
         path: '/register',
@@ -145,3 +152,13 @@ const router = createRouter({
 });
 
 export default router;
+
+
+router.beforeEach(() => {
+  // instead of having to check every route record with
+  // to.matched.some(record => record.meta.requiresAuth)
+  if (window.user) {
+       return {name:'login',query:{locale:'en', q:100}}
+  }
+  
+})

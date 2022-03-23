@@ -38,7 +38,10 @@
                   <br>
                
                 
-                <button type="submit" class="btn btn-primary btn-user btn-block">
+                <button v-if="isLoading" type="button" class="btn btn-primary btn-user btn-block">
+                    Loading
+                </button>
+                 <button v-else type="submit" class="btn btn-primary btn-user btn-block">
                     Login
                 </button>
                 <hr>
@@ -76,17 +79,19 @@
                 login:{
                     email:'',
                     password:''
-                }
+                },
+                isLoading:false
         };
     },
 
     methods: {
         submitFormLogin(){
+            this.isLoading = true
             axios.post('http://127.0.0.1:8000/api/login_user',this.login).then(response =>{
                 console.log(response)
                 if(response.data.token){
                     localStorage.setItem('token',response.data.token)
-                    localStorage.setItem('user',response.data.user)
+                    localStorage.setItem('user',response.data.user.name)
                     this.$router.go('/')
                 }
                 // console.log(response.data)

@@ -36,6 +36,9 @@
 
 
 </template>
+
+
+
 <script>
 
 import axios from 'axios'
@@ -58,7 +61,7 @@ export default {
           async loadCourse(){
            await axios.get('http://127.0.0.1:8000/api/courses/'+this.$route.params.id)
             .then(response =>{
-                 this.showSingleCourse.title = response.data.data.title
+               this.showSingleCourse.title = response.data.data.title
                 this.showSingleCourse.description = response.data.data.description
                 this.showSingleCourse.category_id = response.data.data.category.title
                 this.showSingleCourse.photo =response.data.path+ response.data.data.photo

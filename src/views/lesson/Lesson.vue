@@ -16,7 +16,7 @@
                                     <th style="width: 100px"> Id </th>
                                     <th> Title </th>
                                     <th> Video Url </th>
-                                    <th> Description </th>
+                                  
                                     <th> Category </th>
                                     <th style="width: 170px"> Action </th>
                                 </tr>
@@ -27,13 +27,14 @@
                                     <td style="width: 100px"> {{ index+1 }} </td>
                                     <td> {{ lesson.title }} </td>
                                     <td> {{ lesson.video_url }} </td>
-                                    <td> {{ lesson.description }} </td>
+                                  
                                    <td> {{ lesson.category.title }} </td>     
 
 
                             <td style="width: 170px">
-       <router-link :to="{name: 'edit-lesson', params: {id: lesson.id}}" class="btn btn-primary">Edit</router-link>
-       <button @click="deleteLesson(lesson.id)" class="btn btn-danger ">Delete</button>
+       <router-link :to="{name: 'edit-lesson', params: {id: lesson.id}}" class="btn btn-sm btn-primary">Edit</router-link>
+       <router-link :to="{name: 'show-lesson', params: {id: lesson.id}}" class="btn btn-sm btn-primary">View</router-link>
+       <button @click="deleteLesson(lesson.id)" class="btn btn-sm  btn-danger ">Delete</button>
    
                             </td>
                                 </tr>
