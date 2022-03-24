@@ -24,7 +24,11 @@
                     <input type="email"  class="form-control form-control-user"
                         id="exampleInputEmail" aria-describedby="emailHelp"
                         placeholder="Enter Email Address..."
-                        v-model="login.email">
+                        v-model="login.email"
+                        @keypress="change()"
+                        >
+                     <p v-if="error.email" class="erroLogin">{{error.email}}</p>
+
                 </div>
 
                 <br>
@@ -33,20 +37,25 @@
                 <div class="form-group">
                     <input type="password"  class="form-control form-control-user"
                         id="exampleInputPassword" placeholder="Password"
-                        v-model="login.password">
+                        v-model="login.password"
+                         @keypress="change2()"    
+                        >
+
+                 <p v-if="error.password" class="erroLogin">{{error.password}}</p>
+
                 </div>
                   <br>
                
                 
-                <button v-if="isLoading" type="button" class="btn btn-primary btn-user btn-block">
-                    Loading
-                </button>
-                 <button v-else type="submit" class="btn btn-primary btn-user btn-block">
-                    Login
-                </button>
-                <hr>
-                
-            </form>
+        <button v-if="isLoading" type="button" class="btn btn-primary btn-user btn-block">
+            Loading.....
+        </button>
+            <button v-else type="submit" class="btn btn-primary btn-user btn-block">
+            Login
+        </button>
+        <hr>
+        
+     </form>
 
             <hr>
            
@@ -80,29 +89,59 @@
                     email:'',
                     password:''
                 },
-                isLoading:false
+                isLoading:false,
+                error:[]
         };
     },
 
     methods: {
         submitFormLogin(){
-            this.isLoading = true
+            if(this.login.email == '' && this.login.password == ''){
+                this.error['email'] = 'Email field is required'
+                this.error['password'] = 'Password field is required'
+            }else{
+                
+             this.isLoading = true
+             this.error['name'] = null
+             this.error['email'] = null
+
             axios.post('http://127.0.0.1:8000/api/login_user',this.login).then(response =>{
                 console.log(response)
                 if(response.data.token){
+
                     localStorage.setItem('token',response.data.token)
                     localStorage.setItem('user',response.data.user.name)
                     this.$router.go('/')
+
                 }
-                // console.log(response.data)
+
                 else{
-                    alert('invalid credential')
-                    //  this.login.email = null
-                    //  this.login.password = null
-                  
+                    // alert('invalid credential')
                 }
                 
+            }).catch(error =>{
+
+                 this.isLoading = false
+
+                 this.error['email']    = error.response.data.error
+
+                //when email in unique another filed data has remove
+                
+                 this.login.email = null
+                 this.login.password = null
+                
             })
+            }
+
+           
+        },
+
+        change(){
+            this.error['email'] = null
+         
+        },
+        change2(){
+               this.error['password'] = null
         }
         
     },
@@ -118,6 +157,8 @@
   };
     </script>
 
-    <style lang="scss" scoped>
-
-    </style>
+<style>
+    .erroLogin{
+    color:red
+    }
+</style>

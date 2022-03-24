@@ -3,10 +3,10 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5>Create Category</h5>
-                        <router-link :to="{name: 'Category'}" class="btn btn-primary">Category List</router-link>
-                    </div>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5>Create Category</h5>
+            <router-link :to="{name: 'Category'}" class="btn btn-primary">Category List</router-link>
+        </div>
 <div class="card-body">
 <div class="row">
     <div class="col-6 offset-3">
@@ -18,6 +18,9 @@
                 <input type="text" v-model="categoryForm.title" 
                 @keypress="change()"  class="form-control" name="title" placeholder="category Title">
                 <p v-if="error.title" class="smaill">{{ error.title }}</p>
+
+
+
             </div>
             <br>
             
@@ -56,24 +59,28 @@ export default {
     },
     methods: {
        categorySubmit(){
-           if(this.categoryForm.title == ''){
-               this.error['title'] = 'Category is required'
-           }else{
-                this.isLoading = true
-                this.error['title'] = null
-                axios.post('http://127.0.0.1:8000/api/category',this.categoryForm).then(response => {
-                // console.log(response.data)
-                if(response.data.error){
-                     this.isLoading = false
-                     this.error['title'] = response.data.error
-                }else{
-                 alert(response.data.message)
-                 this.categoryForm.title = null
-                 this.$router.push('/category')
-                }
+        //    if(this.categoryForm.title == ''){
+        //        this.error['title'] = 'Category is required'
+        //    }
+        //    else{
+        this.isLoading = true
+        this.error['title'] = null
+        axios.post('http://127.0.0.1:8000/api/category',this.categoryForm).then(response => {
+        // console.log(response.data)
+        // if(response.data.error){
+        //         this.isLoading = false
+        //         this.error['title'] = response.data.error
+        // }
+        // else{
+            alert(response.data.message)
+            this.categoryForm.title = null
+            this.$router.push('/category')
+        // }
                 
-            })
-           }
+       }).catch(error =>{
+            this.error['title']  = error.response.data.errors.title
+       })
+        //    }
              
         },
         change(){

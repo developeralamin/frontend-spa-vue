@@ -16,41 +16,60 @@
 
             <div class="form-group">
                 <label for="">Course name</label>
-                <input type="text"  required v-model="addCourse.title"   class="form-control"  placeholder="Course Title">
+                <input type="text"  v-model="addCourse.title"
+                   class="form-control"  
+                   placeholder="Course Title">
+
+             <p v-if="error.title" class="errorCourse">{{ error.title }}</p>
+
+
             </div>
-                <br>
-                <div class="form-group">
-                <label for="">Description</label>
-               <textarea name="" id="" v-model="addCourse.description" required class="form-control" placeholder="Course description" cols="30" rows="10"></textarea> 
-                
-            </div>
+             <br>
+        <div class="form-group">
+        <label for="">Description</label>
+            <textarea name="" id="" v-model="addCourse.description"
+                class="form-control" placeholder="Course description"
+                cols="30" rows="10"></textarea> 
+
+        <p v-if="error.description" class="errorCourse">{{ error.description }}</p>
+
+
+        </div>
             <br>
             
-            <div class="form-group">
-                <label for="">Category</label>
-
+        <div class="form-group">
+         <label for="">Category</label>
         <select v-model="addCourse.category_id" class="form-control">
           <option value="">Select Category</option>
-          <option  v-for="category in categories" :key="category.id" :value="category.id">{{ category.title }}</option>
+          <option  v-for="category in categories" 
+          :key="category.id" :value="category.id">
+          {{ category.title }}
+          </option>
         </select>
-            </div>
-                <br>
-
-                <img :src="image" alt="" style="height:100px">
-                
-                <br>
-
-            <div class="form-group">
-                <label for="">Course Thumbnail</label>
-                <input type="file"  required  @change="onImageChange"  class="form-control"  placeholder="">
+  <p v-if="error.category_id" class="errorCourse">{{ error.category_id }}</p>
 
             </div>
 
-     
-                <br>
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">Create Course</button>
-            </div>
+            <br>
+            <img :src="image" alt="" style="height:100px">
+            <br>
+
+        <div class="form-group">
+            <label for="">Course Thumbnail</label>
+            <input type="file"  name="photo"  
+            @change="onImageChange"  
+            class="form-control"  placeholder="">
+
+    <p v-if="error.photo" class="errorCourse">{{ error.photo }}</p>
+
+        </div>
+
+
+        <br>
+    <div class="form-group">
+        <button v-if="isLoading" type="button" class="btn btn-success">Loading</button>
+        <button v-else type="submit" class="btn btn-success">Create Course</button>
+    </div>
 
 
     </form>
@@ -83,7 +102,9 @@ export default {
                 description:'',
                 photo:'',
                 category_id:''
-            }
+            },
+            isLoading:false,
+            error:[]
         };
     },
 
@@ -112,6 +133,8 @@ export default {
              formData.append('description', this.addCourse.description)
              formData.append('category_id', this.addCourse.category_id)
 
+             this.isLoading = true
+
              axios.post('http://127.0.0.1:8000/api/courses',formData).then(response =>{
                  alert(response.data.message)
                  console.log(response.data.message)
@@ -121,6 +144,13 @@ export default {
                  this.addCourse.category_id = null
                  
                  this.$router.push('/course')
+             }).catch(error =>{
+                  this.isLoading = false
+
+                 this.error['title']       = error.response.data.errors.title
+                 this.error['description'] = error.response.data.errors.description
+                 this.error['photo']       = error.response.data.errors.photo
+                 this.error['category_id'] = error.response.data.errors.category_id
              })
          },
           
@@ -143,5 +173,7 @@ export default {
 </script>
 
 <style>
-
+.errorCourse{
+  color:red
+}
 </style>

@@ -14,25 +14,27 @@
 
         <form @submit.prevent="bennarSubmit()">
 
-            <div class="form-group">
-                <label for="">Bennar name</label>
-                <input type="text"  required   v-model="addBennar.title"  class="form-control"  placeholder="Bennar Title">
-            </div>
-                <br>
+        <div class="form-group">
+            <label for="">Bennar name</label>
+            <input type="text" v-model="addBennar.title"  class="form-control" placeholder="Bennar Title">
+            <p v-if="error.title"  class="errorBennar">{{ error.title }}</p>
+        </div>
+        
+        <br>
+        <img :src="image" alt="" style="height:100px">
+        <br>
 
-                <img :src="image" alt="" style="height:100px">
-                
-                <br>
+    <div class="form-group">
+        <label for="">Bennar Thumbnail</label>
+        <input type="file" name="photo"   @change="loadImage"  class="form-control"  placeholder="">
+         <p v-if="error.photo" class="errorBennar">{{ error.photo }}</p>
 
-            <div class="form-group">
-                <label for="">Bennar Thumbnail</label>
-                <input type="file"  required @change="loadImage"  class="form-control"  placeholder="">
-
-            </div>
-           <br>
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">Create Bennar</button>
-            </div>
+    </div>
+    <br>
+    <div class="form-group">
+        <button v-if="isLoading" type="button" class="btn btn-success">Loading....</button>
+        <button v-else type="submit" class="btn btn-success">Create Bennar</button>
+    </div>
 
 
     </form>
@@ -56,6 +58,8 @@ export default {
 
     data() {
         return {
+            isLoading:false,
+            error:[],
              image:'',
             addBennar:{
                 title:'',
@@ -78,10 +82,18 @@ export default {
         },
 
         bennarSubmit(){
-                let formData = new FormData();
 
-                formData.append('title',this.addBennar.title);
-                formData.append('photo',this.addBennar.photo);
+        let formData = new FormData();
+        formData.append('title',this.addBennar.title);
+        formData.append('photo',this.addBennar.photo);
+
+        if(this.addBennar.title == '' && this.addBennar.photo ==''){
+            this.error['title'] = 'Benner field is required'
+            this.error['photo'] = 'Image field is required'
+        }else{
+             this.isLoading = true
+             this.error['title'] = null
+             this.error['photo'] = null
 
              axios.post('http://127.0.0.1:8000/api/bennar',formData).then(response =>{
                  alert(response.data.message)
@@ -93,6 +105,8 @@ export default {
                   this.$router.push('/bennar')
 
              })
+        }
+            
         }
       
     },
@@ -108,5 +122,8 @@ export default {
 </script>
 
 <style>
+.errorBennar{
+ color: red
+}
 
 </style>
