@@ -130,7 +130,7 @@ export default {
     },
 
     mounted() {
-         const getToken = localStorage.getItem('token');
+     const getToken = localStorage.getItem('token');
         if(!getToken){
          this.$router.push('/login')
         }

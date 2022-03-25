@@ -73,6 +73,10 @@ export default {
     },
 
     mounted() {
+         const getToken = localStorage.getItem('token');
+        if(!getToken){
+         this.$router.push('/login')
+        }
         this.loadSingleLesson()
     },
 };

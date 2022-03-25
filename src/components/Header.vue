@@ -20,8 +20,12 @@
                     <li class="nav-item">
                         <router-link :to="{name: 'course'}" v-if="isActive" class="nav-link">Course</router-link>
                     </li>
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <router-link :to="{name: 'bennar'}" v-if="isActive" class="nav-link">Bennar</router-link>
+                    </li>
+
+                    <li class="nav-item">
+                        <router-link :to="{name: 'about'}" v-if="isActive" class="nav-link">About</router-link>
                     </li>
 
                       <li class="nav-item">

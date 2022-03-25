@@ -136,6 +136,7 @@ export default {
              this.isLoading = true
 
              axios.post('http://127.0.0.1:8000/api/courses',formData).then(response =>{
+                 
                  alert(response.data.message)
                  console.log(response.data.message)
                  this.addCourse.title = null
@@ -145,7 +146,7 @@ export default {
                  
                  this.$router.push('/course')
              }).catch(error =>{
-                  this.isLoading = false
+                 this.isLoading = false
 
                  this.error['title']       = error.response.data.errors.title
                  this.error['description'] = error.response.data.errors.description

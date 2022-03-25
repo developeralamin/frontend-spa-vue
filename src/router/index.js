@@ -21,6 +21,13 @@ import Bennar from '@/views/bennar/Bennar.vue'
 import CreateBennar from '@/views/bennar/CreateBennar.vue'
 import EditBennar from '@/views/bennar/EditBennar.vue'
 
+// About component
+
+import About from '@/views/about/About.vue'
+import CreateAbout from '@/views/about/CreateAbout.vue'
+import EditAbout from '@/views/about/EditAbout.vue'
+import ShowAbout from '@/views/about/ShowAbout.vue'
+
 
 import Login from '@/views/auth/Login.vue'
 import Register from '@/views/auth/Register.vue'
@@ -125,6 +132,34 @@ const routes = [
         component:EditBennar
         
     },
+  //about section
+      {
+        path: '/about',
+        name: 'about',
+        component:About
+    },
+     
+ {
+        path: '/about/create',
+        name: 'create-about',
+        component:CreateAbout
+        
+     },
+     {
+        path: '/about/edit/:id',
+        name: 'edit-about',
+        component:EditAbout
+        
+    },
+     
+          {
+        path: '/about/show/:id',
+        name: 'show-about',
+        component:ShowAbout
+        
+    },
+    //course details show 
+     
     {
            path: '/course/:id',
             component: CourseDetails,

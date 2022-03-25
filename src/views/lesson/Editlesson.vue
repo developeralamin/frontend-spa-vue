@@ -14,35 +14,35 @@
 
          <form @submit.prevent="updateLesson()">
 
-                        <div class="form-group">
-                            <label for="">Lesson name</label>
-                            <input type="text"  required v-model="addLesson.title"  class="form-control"  placeholder="Lesson Title">
-                        </div>
-                         <br>
-                         <div class="form-group">
-                            <label for="">Description</label>
-                            <input type="text"  required v-model="addLesson.description"  class="form-control" placeholder="Lesson description">
-                        </div>
- <br>
-                         <div class="form-group">
-                            <label for="">Video</label>
-                            <input type="text"  required  v-model="addLesson.video_url" class="form-control"  placeholder="Lesson video_url">
-                        </div>
- <br>
-                        <div class="form-group">
-                            <label for="">Category</label>
-     
-    <select v-model="addLesson.category_id"  class="form-control">
-        <option value="">Select Category</option>
-        <option  v-for="category in categories" :key="category.id" :value="category.id">{{ category.title }}</option>
-                
- </select>
-                        </div>
-                         <br>
-                        
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success">Update Lesson</button>
-                        </div>
+        <div class="form-group">
+            <label for="">Lesson name</label>
+            <input type="text"  required v-model="addLesson.title"  class="form-control"  placeholder="Lesson Title">
+        </div>
+            <br>
+            <div class="form-group">
+            <label for="">Description</label>
+            <input type="text"  required v-model="addLesson.description"  class="form-control" placeholder="Lesson description">
+        </div>
+<br>
+            <div class="form-group">
+            <label for="">Video</label>
+            <input type="text"  required  v-model="addLesson.video_url" class="form-control"  placeholder="Lesson video_url">
+        </div>
+<br>
+        <div class="form-group">
+            <label for="">Category</label>
+
+<select v-model="addLesson.category_id"  class="form-control">
+<option value="">Select Category</option>
+<option  v-for="category in categories" :key="category.id" :value="category.id">{{ category.title }}</option>
+
+</select>
+        </div>
+            <br>
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Update Lesson</button>
+        </div>
 
 
              </form>

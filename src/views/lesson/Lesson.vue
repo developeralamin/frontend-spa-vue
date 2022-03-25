@@ -6,7 +6,9 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Lesson List</h5>
                 
-                        <router-link :to="{name:'create-lesson'}" class="btn btn-primary">Create Lesson</router-link>
+  <router-link :to="{name:'create-lesson'}" class="btn btn-primary">
+  Create Lesson
+  </router-link>
                     </div>
 
                     <div class="card-body">
@@ -33,7 +35,7 @@
 
                             <td style="width: 170px">
        <router-link :to="{name: 'edit-lesson', params: {id: lesson.id}}" class="btn btn-sm btn-primary">Edit</router-link>
-       <router-link :to="{name: 'show-lesson', params: {id: lesson.id}}" class="btn btn-sm btn-primary">View</router-link>
+       <router-link :to="{name: 'show-lesson', params: {id: lesson.id}}" class="btn btn-sm btn-succes">View</router-link>
        <button @click="deleteLesson(lesson.id)" class="btn btn-sm  btn-danger ">Delete</button>
    
                             </td>
