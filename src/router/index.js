@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 
 import Home from '@/views/Home.vue';
+import PageNotFound from '@/views/PageNotFound.vue';
 import CourseDetails from '@/views/CourseDetails.vue';
 // category component
 import Category from '@/views/category/Category.vue';
@@ -160,7 +161,7 @@ const routes = [
     },
     //course details show 
      
-    {
+     {
            path: '/course/:id',
             component: CourseDetails,
             name: 'course-details',
@@ -176,7 +177,15 @@ const routes = [
         path: '/register',
         name: 'register',
         component:Register
-    }
+    },
+
+
+   // Not Found Page
+    {
+         path: '/:catchAll(.*)*',
+        name: "NotFound",
+        component:PageNotFound
+    },  
     
 ];
 
@@ -184,16 +193,18 @@ const router = createRouter({
    history: createWebHistory(),
    routes,
 
+
+ scrollBehavior (to, from, savedPosition) {
+        return savedPosition || new Promise((resolve) => {
+            setTimeout(() => {
+                  resolve({top:0 ,  behavior: 'smooth',})
+            }, 3000);
+        } )
+          
+    }
+
 });
 
 export default router;
 
 
-router.beforeEach(() => {
-  // instead of having to check every route record with
-  // to.matched.some(record => record.meta.requiresAuth)
-  if (window.user) {
-       return {name:'login',query:{locale:'en', q:100}}
-  }
-  
-})

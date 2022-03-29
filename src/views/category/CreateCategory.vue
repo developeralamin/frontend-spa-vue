@@ -100,7 +100,7 @@ export default {
 
 <style>
 a.router-link-active.router-link-exact-active.nav-link {
-    color: white!important;
+    color: black!important;
     background: red;
     padding: 12px;
     border-radius: 4px;

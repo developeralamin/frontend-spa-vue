@@ -4,7 +4,7 @@ import router from './router'
 import axios from 'axios';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import LaravelVuePagination from 'laravel-vue-pagination';
+// import LaravelVuePagination from 'laravel-vue-pagination';
 
  const getToken = localStorage.getItem('token');
     if(getToken){
@@ -13,6 +13,6 @@ import LaravelVuePagination from 'laravel-vue-pagination';
 
 
 
-createApp(App).use(router,axios,LaravelVuePagination).mount('#app')
+createApp(App).use(router,axios).mount('#app')
 
 

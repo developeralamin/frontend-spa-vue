@@ -114,7 +114,10 @@ methods: {
                 this.error['password'] = null
 
         if(this.userSignUp.password.length < 6 ||  this.userSignUp.password.length > 10 ){
+            
+                this.isLoading = false
                 this.error['password'] = 'Password At least 6 to 10 character'
+                
             
         }else{
                 axios.post('http://127.0.0.1:8000/api/sign_up',this.userSignUp).then(response =>{
@@ -132,9 +135,6 @@ methods: {
 
                  this.$router.push('/login')
                 
-
-               
-
             }).catch(error=>{
                 this.isLoading = false
                 this.error['email'] = error.response.data.errors.email

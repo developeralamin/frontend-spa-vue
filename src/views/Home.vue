@@ -4,7 +4,7 @@
         <br>
         <br>
         <div class="row">
-            <div class="col-3 mb-3" v-for="(course,index) in courses" :key="index" >
+            <div class="col-4 mb-4" v-for="(course,index) in courses" :key="index" >
             <div class="card"  >     
             <img :src="course.photo" class="card-img-top" style="height: 150px; object-fit: cover; overflow: hidden" alt="...">      
                 <div class="card-body">
@@ -59,6 +59,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style>
 
 </style>
